@@ -59,14 +59,14 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   Open another new terminal, edit `ROCKET_PORT` in `.env` to `8003`, then execute `cargo run`.
 
 ## Mandatory Checklists (Subscriber)
--   [ ] Clone https://gitlab.com/ichlaffterlalu/bambangshop-receiver to a new repository.
+-   [x] Clone https://gitlab.com/ichlaffterlalu/bambangshop-receiver to a new repository.
 -   **STAGE 1: Implement models and repositories**
-    -   [ ] Commit: `Create Notification model struct.`
-    -   [ ] Commit: `Create SubscriberRequest model struct.`
-    -   [ ] Commit: `Create Notification database and Notification repository struct skeleton.`
-    -   [ ] Commit: `Implement add function in Notification repository.`
-    -   [ ] Commit: `Implement list_all_as_string function in Notification repository.`
-    -   [ ] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
+    -   [x] Commit: `Create Notification model struct.`
+    -   [x] Commit: `Create SubscriberRequest model struct.`
+    -   [x] Commit: `Create Notification database and Notification repository struct skeleton.`
+    -   [x] Commit: `Implement add function in Notification repository.`
+    -   [x] Commit: `Implement list_all_as_string function in Notification repository.`
+    -   [x] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 3: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -85,5 +85,15 @@ This is the place for you to write reflections:
 ### Mandatory (Subscriber) Reflections
 
 #### Reflection Subscriber-1
+###### 1. In this tutorial, we used **RwLock<>** to synchronise the use of **Vec** of **Notifications**. Explain why it is necessary for this case, and explain why we do not use **Mutex<>** instead?
+* `RwLock<Vec>` sangat diperlukan untuk mengkoordinasikan penggunaan dengan struktur data, yaitu sebuah Vector yang berisi notifikasi di sepanjang *thread*. RwLock memungkinkan beberapa *reader* untuk mengakses data secara bersamaaan, sementara hanya ada satu *reader* yang bisa mengubahnya.
+* Hal tersebut penting dalam *multi-threading* untuk menghindari persaingan data yang bisa terjadi secara acak dan memastikan bahwa informasi yang diakses selalu konsisten.
+* Pilihan RwLock didasarkan pada strategi *locking* yang berbeda. RwLock memperbolehkan beberapa *reader* untuk *read lock* secara bersamaan untuk skenario apabila operasi *read* lebih sering tejadi daripada operasi *write*.
+* Namun, Mutex hanya mengizinkan satu *thread* untuk memiliki akses eksklusif pada satu waktu yang bisa menghambat kinerja jika ada banyak operasi *read* yang terjadi secara bersamaan.
+
+###### 2. In this tutorial, we used **lazy_static** external library to define **Vec** and **DashMap** as a **“static”** variable. Compared to Java where we can mutate the content of a **static** variable via a **static** function, why did not Rust allow us to do so?
+* Pada Rust, tidak diizinkan untuk melakukan perubahan pada nilai *static variable* karena bertentangan dengan prinsip-prinsip *ownership* dan *borrowing*. Hal ini terkait dengan konsep *mutable aliasing*, di mana Rust sangat memperhatikan keamanan memori dan mencegah kesalahan data dengan menerapkan aturan terkait referensi *mutable* dan status bersama yang dapat dimutasi.
+* Pada Java, diizinkan untuk mengubah nilai *static variable* melalui *static function* karena Java memiliki pendekatan yang lebih longgar dalam hal keselamatan memori. Java menggunakan metode sinkronisasi eksplisit, seperti *synchronized block* atau *volatile variable* untuk memastikan keamanan *thread*, berbeda dengan Rust yang lebih mengandalkan sistem *borrowing* dan *primitive concurrency*.
+* Rust menempatkan prioritas utama pada keselamatan memori dengan menggunakan *borrowing* dan *primitive concurrency* seperti RwLock dan Mutex untuk memberikan *concurrency* yang aman dan efisien. Pendekatan ini membedakannya dari Java yang lebih sering menggunakan cara langsung untuk mengatur keamanan *thread*.
 
 #### Reflection Subscriber-2
