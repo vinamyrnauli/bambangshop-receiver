@@ -68,16 +68,16 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement list_all_as_string function in Notification repository.`
     -   [x] Write answers of your learning module's "Reflection Subscriber-1" questions in this README.
 -   **STAGE 3: Implement services and controllers**
-    -   [] Commit: `Create Notification service struct skeleton.`
-    -   [] Commit: `Implement subscribe function in Notification service.`
-    -   [] Commit: `Implement subscribe function in Notification controller.`
-    -   [] Commit: `Implement unsubscribe function in Notification service.`
-    -   [] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [] Commit: `Implement receive_notification function in Notification service.`
-    -   [] Commit: `Implement receive function in Notification controller.`
-    -   [] Commit: `Implement list_messages function in Notification service.`
-    -   [] Commit: `Implement list function in Notification controller.`
-    -   [] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
+    -   [x] Commit: `Create Notification service struct skeleton.`
+    -   [x] Commit: `Implement subscribe function in Notification service.`
+    -   [x] Commit: `Implement subscribe function in Notification controller.`
+    -   [x] Commit: `Implement unsubscribe function in Notification service.`
+    -   [x] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [x] Commit: `Implement receive_notification function in Notification service.`
+    -   [x] Commit: `Implement receive function in Notification controller.`
+    -   [x] Commit: `Implement list_messages function in Notification service.`
+    -   [x] Commit: `Implement list function in Notification controller.`
+    -   [x] Write answers of your learning module's "Reflection Subscriber-2" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -97,3 +97,16 @@ This is the place for you to write reflections:
 * Rust menempatkan prioritas utama pada keselamatan memori dengan menggunakan *borrowing* dan *primitive concurrency* seperti RwLock dan Mutex untuk memberikan *concurrency* yang aman dan efisien. Pendekatan ini membedakannya dari Java yang lebih sering menggunakan cara langsung untuk mengatur keamanan *thread*.
 
 #### Reflection Subscriber-2
+###### 1. Have you explored things outside of the steps in the tutorial, for example: **src/lib.rs**? If not, explain why you did not do so. If yes, explain things that you have learned from those other parts of code.
+* Penggunaan *lazy_static* untuk inisialisasi *global variable* sangat bermanfaat bagi saya untuk memperdalam penggunaan *lazy_static* dalam Rust dengan menginisialisasi *global variable* secara efisien. *Global variable* diinisialisasi hanya saat pertama kali digunakan, mengurangi *overhead* saat program dimulai.
+* Implementasi konfigurasi aplikasi dengan `.env` file membuat saya dapat memahami bahwa pengaturan seperti *port*, koneksi *database*, atau token API dapat disimpan secara terpusat dan mudah diakses.
+* Penanganan kesalahan dengan tipe `Result<T,E>` bermanfaat bagi saya dalam mengelola kesalahan secara sistematis pada aplikasi Rust. Tipe *Result* memisahkan nilai sukses (Ok) dan nilai *error* (Err) untuk penanganan yang lebih terstruktur.
+* Penggunaan `Custom<Json>` untuk respons *error* mengajarkan saya untuk meningkatkan kejelasan dan kegunaan informasi kesalahan yang disampaikan kepada *user*.
+
+###### 2. Since you have completed the tutorial by now and have tried to test your notification system by spawning multiple instances of Receiver, explain how Observer pattern eases you to plug in more subscribers. How about spawning more than one instance of Main app, will it still be easy enough to add to the system?
+* Penggunaan *Observer Pattern* dalam sistem notifikasi dapat menyederhanakan proses penambahan *subscriber* baru. Dengan menyimpan daftar *observer*, memungkinkan penambahan *subscriber* baru tanpa perlu mengubah struktur inti dari aplikasi. *Observer Pattern* memfasilitasi pengiriman notifikasi kepada semua *subscriber* yang terdaftar dengan cara yang lebih efisien.
+* Saya juga mengalami tantangan saat menggunakan lebih dari satu *instance* di *main app*. Saat mencoba membuat beberapa *instance* dari aplikasi utama, setiap *instance* memiliki *Observer Pattern* sendiri. Jadi, jika ingin berbagi notifikasi antar *instance*, diperlukan mekanisme penyimpanan data bersama yang dapat diakses oleh semua *instance*. Hal tersebut dapat menimbulkan tantangan dalam memastikan sinkronisasi dan konsistensi antar-*instance* aplikasi, tertuama dalam pertukaran informasi atau notifikasi.
+
+###### 3. Have you tried to make your own Tests, or enhance documentation on your **Postman collection**? If you have tried those features, tell us whether it is useful for your work (it can be your tutorial work or your Group Project).
+* Walaupun saya belum membuat tes atau meningkatkan dokumentasi di Postman, saya yakin bahwa kedua fitur tersebut akan berguna untuk tugas kelompok saya nantinya.
+* Dalam proyek kelompok, kemampuan untuk membuat tes yang komprehensif akan memastikan kinerja aplikasi kami. Selain itu, peningkatan dokumentasi di Postman akan memudahkan kolaborasi tim dalam pengembangan dan pengujian aplikasi. 
