@@ -1,2 +1,2 @@
 pub mod subscriber;
-pub mod notificiation;
+pub mod notification;
